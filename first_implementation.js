@@ -1,5 +1,7 @@
+// Import the hashing function
 const SHA256 = require('crypto-js/sha256');
 
+// Create a block class
 class Block {
   constructor(index, timestamp, data, previousHash =''){
     this.index = index;
@@ -29,7 +31,7 @@ class Blockchain{
   }
 
   getLatestBlock(){
-    return this.chain[this.chain.length -1];
+    return this.chain[this.chain.length - 1];
   }
 
   addBlock(newBlock){
@@ -43,19 +45,18 @@ class Blockchain{
       const currentBlock = this.chain[i];
       const previousBlock = this.chain[i - 1];
       
-      // Actual hash of the block does not match with what current one says
+      // Actual hash of the current block does not match with what it should be
       if(currentBlock.hash !== currentBlock.calculateHash()){
         return false;
       }
 
-      // Check if previous hash matches
+      // Check if previous hash matches up
       if(currentBlock.previousHash !== previousBlock.hash){
         return false;
       }
-
-      return true;
-
     }
+    return true;
+    
   }
 
 }
@@ -72,5 +73,11 @@ aliCoin.chain[1].data = { amount: 1000000000 };
 console.log('is blockchain valid? ' + aliCoin.isChainValid());
 
 // let's try something more clever...
-aliCoin.chain[1].calculateHash();
+aliCoin.chain[1].hash = aliCoin.chain[1].calculateHash();
 console.log('is blockchain valid? ' + aliCoin.isChainValid());
+
+// Let's be MOAR clever!
+aliCoin.chain[2].previousHash = aliCoin.chain[1].hash;
+aliCoin.chain[2].hash = aliCoin.chain[2].calculateHash();
+console.log('is blockchain valid? ' + aliCoin.isChainValid());
+
