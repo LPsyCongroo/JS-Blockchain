@@ -20,7 +20,7 @@ class Block {
       + this.previousHash 
       + this.timestamp 
       + JSON.stringify(this.data)
-      +this.nonce
+      + this.nonce
     ).toString();
   }
 
@@ -85,3 +85,8 @@ console.log('mining block 2...');
 aliCoin.addBlock(new Block(2, "10/07/2017", { amount: 4 }));
 
 
+/**
+ * how to stop someone adding a block
+ * what happens if a block is added before you finish mining
+ * how to fix a successful addition to block chain
+ */
