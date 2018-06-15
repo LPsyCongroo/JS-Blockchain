@@ -81,3 +81,5 @@ aliCoin.chain[2].previousHash = aliCoin.chain[1].hash;
 aliCoin.chain[2].hash = aliCoin.chain[2].calculateHash();
 console.log('is blockchain valid? ' + aliCoin.isChainValid());
 
+// At this point, we can change the data if we update the hash for the rest of the chain
+
